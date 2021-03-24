@@ -32,7 +32,6 @@ class AverageLengthTestCase(unittest.TestCase):
                                 content_type='multipart/form-data',
                                 data=data)
         json_resp = json.loads(result.data.decode('utf8'))
-        # Assert that longest_words is empty
         self.assertEqual(json_resp['average_length'], 0)
 
 if __name__ == '__main__':

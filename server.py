@@ -56,5 +56,19 @@ def average_length():
 
     return jsonify({"average_length": sum(word_lengths)/len(word_lengths)})
 
+@app.route('/unique-count', methods=['POST'])
+def unique_count():
+    input_file = request.files['file']
+    file_content = input_file.read().decode('utf-8').strip()
+    if not file_content:
+        return jsonify({"unique_count": 0})
+
+    unique_words = []
+    for word in file_content.split(" "):
+        if word not in unique_words:
+            unique_words.append(word)
+
+    return jsonify({"unique_count": len(unique_words)})
+
 if __name__ == "__main__":
     app.run(host=DEFAULT_HOST, debug=True)
