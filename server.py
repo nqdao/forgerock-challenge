@@ -16,14 +16,14 @@ def health():
 
 @app.route('/longest-words', methods=['POST'])
 def longest_words():
-    word_list = []
     input_file = request.files['file']
     file_content = input_file.read().decode('utf-8').strip()
-    if file_content:
-        word_list = file_content.split(" ")
+    if not file_content:
+        return jsonify({"longest_words": []})
+
+    word_list = file_content.split(" ")
     longest_words = []
     max_len = 0
-
     if word_list:
         for word in word_list:
             if len(word) > max_len:
@@ -39,9 +39,10 @@ def longest_words():
 def word_count():
     input_file = request.files['file']
     file_content = input_file.read().decode('utf-8').strip()
-    word_list = []
-    if file_content:
-        word_list = file_content.split(" ")
+    if not file_content:
+        return jsonify({"word_count": 0})
+
+    word_list = file_content.split(" ")
 
     resp = {"word_count": len(word_list)}
     return jsonify(resp)
