@@ -35,5 +35,16 @@ def longest_words():
     resp = {"longest_words": longest_words}
     return jsonify(resp)
 
+@app.route('/word-count', methods=['POST'])
+def word_count():
+    input_file = request.files['file']
+    file_content = input_file.read().decode('utf-8').strip()
+    word_list = []
+    if file_content:
+        word_list = file_content.split(" ")
+
+    resp = {"word_count": len(word_list)}
+    return jsonify(resp)
+
 if __name__ == "__main__":
     app.run(host=DEFAULT_HOST, debug=True)
