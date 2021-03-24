@@ -7,8 +7,8 @@ COPY requirements.txt /app/
 RUN python -m pip install --upgrade pip \
     && python3 -m pip install -r requirements.txt
 
-COPY server.py /app/
+COPY . /app/
 
 EXPOSE 5000
 
-CMD ["ls"]
+CMD ["python", "server.py"]
