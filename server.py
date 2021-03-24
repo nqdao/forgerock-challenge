@@ -23,7 +23,7 @@ def longest_words():
     if not file_content:
         return jsonify({"longest_words": []})
 
-    result = get_longest_words(file_content.split(" "))
+    result = get_longest_words(file_content.split())
     return jsonify({"longest_words": result})
 
 @app.route('/word-count', methods=['POST'])
@@ -33,7 +33,7 @@ def word_count():
     if not file_content:
         return jsonify({"word_count": 0})
 
-    result = get_word_count(file_content.split(" "))
+    result = get_word_count(file_content.split())
     return jsonify({"word_count": result})
 
 @app.route('/average-length', methods=['POST'])
@@ -43,7 +43,7 @@ def average_length():
     if not file_content:
         return jsonify({"average_length": 0})
 
-    result = get_average_length(file_content.split(" "))
+    result = get_average_length(file_content.split())
     return jsonify({"average_length": result})
 
 @app.route('/unique-count', methods=['POST'])
@@ -53,7 +53,7 @@ def unique_count():
     if not file_content:
         return jsonify({"unique_count": 0})
 
-    result = get_unique_count(file_content.split(" "))
+    result = get_unique_count(file_content.split())
     return jsonify({"unique_count": result})
 
 @app.route('/palindrome-count', methods=['POST'])
@@ -63,7 +63,7 @@ def palindrome_count():
     if not file_content:
         return jsonify({"palindrome_count": 0})
 
-    result = get_palindrome_count(file_content.split(" "))
+    result = get_palindrome_count(file_content.split())
     return jsonify({"palindrome_count": result})
 
 if __name__ == "__main__":
