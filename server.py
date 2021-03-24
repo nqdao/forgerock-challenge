@@ -32,8 +32,7 @@ def longest_words():
             elif len(word) == max_len:
                 longest_words.append(word)
 
-    resp = {"longest_words": longest_words}
-    return jsonify(resp)
+    return jsonify({"longest_words": longest_words})
 
 @app.route('/word-count', methods=['POST'])
 def word_count():
@@ -44,8 +43,18 @@ def word_count():
 
     word_list = file_content.split(" ")
 
-    resp = {"word_count": len(word_list)}
-    return jsonify(resp)
+    return jsonify({"word_count": len(word_list)})
+
+@app.route('/average-length', methods=['POST'])
+def average_length():
+    input_file = request.files['file']
+    file_content = input_file.read().decode('utf-8').strip()
+    if not file_content:
+        return jsonify({"average_length": 0})
+
+    word_lengths = [len(word) for word in file_content.split(" ")]
+
+    return jsonify({"average_length": sum(word_lengths)/len(word_lengths)})
 
 if __name__ == "__main__":
     app.run(host=DEFAULT_HOST, debug=True)
