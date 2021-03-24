@@ -70,5 +70,19 @@ def unique_count():
 
     return jsonify({"unique_count": len(unique_words)})
 
+@app.route('/palindrome-count', methods=['POST'])
+def palindrome_count():
+    input_file = request.files['file']
+    file_content = input_file.read().decode('utf-8').strip()
+    if not file_content:
+        return jsonify({"palindrome_count": 0})
+
+    count = 0
+    for word in file_content.split(" "):
+        if word == word[::-1]:
+            count += 1
+
+    return jsonify({"palindrome_count": count})
+
 if __name__ == "__main__":
     app.run(host=DEFAULT_HOST, debug=True)
